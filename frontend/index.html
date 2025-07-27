@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventHub - Connect Through Events & Communities</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              border: "hsl(210 16% 88%)",
+              input: "hsl(210 16% 88%)",
+              ring: "hsl(204 70% 45%)",
+              background: "hsl(220 13% 96%)",
+              foreground: "hsl(218 23% 15%)",
+              primary: {
+                DEFAULT: "hsl(210 29% 20%)",
+                foreground: "hsl(0 0% 100%)",
+              },
+              secondary: {
+                DEFAULT: "hsl(204 70% 45%)",
+                foreground: "hsl(0 0% 100%)",
+              },
+              destructive: {
+                DEFAULT: "hsl(6 78% 50%)",
+                foreground: "hsl(0 0% 100%)",
+              },
+              muted: {
+                DEFAULT: "hsl(210 16% 90%)",
+                foreground: "hsl(215 25% 35%)",
+              },
+              accent: {
+                DEFAULT: "hsl(6 78% 50%)",
+                foreground: "hsl(0 0% 100%)",
+              },
+              popover: {
+                DEFAULT: "hsl(0 0% 100%)",
+                foreground: "hsl(218 23% 15%)",
+              },
+              card: {
+                DEFAULT: "hsl(0 0% 100%)",
+                foreground: "hsl(218 23% 15%)",
+              },
+              brand: {
+                50: "#faf5ff",
+                100: "#f3e8ff",
+                200: "#e9d5ff",
+                300: "#d8b4fe",
+                400: "#c084fc",
+                500: "#a855f7",
+                600: "#9333ea",
+                700: "#7c3aed",
+                800: "#6b21a8",
+                900: "#581c87",
+                950: "#3b0764",
+              },
+              success: {
+                DEFAULT: "hsl(145 63% 42%)",
+                foreground: "hsl(0 0% 100%)",
+              },
+              warning: {
+                DEFAULT: "hsl(48 89% 50%)",
+                foreground: "hsl(0 0% 100%)",
+              },
+            },
+            borderRadius: {
+              lg: "0.5rem",
+              md: "calc(0.5rem - 2px)",
+              sm: "calc(0.5rem - 4px)",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="css/global.css" />
+  </head>
+  <body class="min-h-screen">
+    <!-- Landing Page Content -->
+    <div id="landing-page">
+      <!-- Navbar -->
+      <nav
+        class="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50 shadow-sm"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between h-16">
+            <div class="flex items-center">
+              <a href="/" class="flex items-center space-x-2 group">
+                <div
+                  class="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg flex items-center justify-center group-hover:from-purple-600 group-hover:to-purple-800 transition-all"
+                >
+                  <svg
+                    class="w-5 h-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+                <span
+                  class="text-xl font-bold text-gray-900 group-hover:text-purple-700 transition-colors"
+                >
+                  EventHub
+                </span>
+              </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+              <a
+                href="pages/events.html"
+                class="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <span>Events</span>
+              </a>
+              <a
+                href="pages/clubs.html"
+                class="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+                <span>Clubs</span>
+              </a>
+            </div>
+
+            <!-- Desktop Auth -->
+            <div class="hidden md:flex items-center space-x-4">
+              <a
+                href="pages/auth/login.html"
+                class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Sign in
+              </a>
+              <a
+                href="pages/auth/register.html"
+                class="bg-purple-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors"
+              >
+                Get started
+              </a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="md:hidden flex items-center">
+              <button
+                id="mobile-menu-button"
+                class="text-gray-600 hover:text-gray-900 p-2"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mobile Navigation -->
+          <div
+            id="mobile-menu"
+            class="md:hidden border-t border-gray-200 py-4 hidden"
+          >
+            <div class="flex flex-col space-y-2">
+              <a
+                href="pages/events.html"
+                class="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <span>Events</span>
+              </a>
+              <a
+                href="pages/clubs.html"
+                class="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+                <span>Clubs</span>
+              </a>
+              <div class="border-t border-gray-200 pt-4 mt-4">
+                <a
+                  href="pages/auth/login.html"
+                  class="block px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                >
+                  Sign in
+                </a>
+                <a
+                  href="pages/auth/register.html"
+                  class="block px-3 py-2 rounded-md text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 mt-2"
+                >
+                  Get started
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section
+        class="relative bg-gradient-to-br from-purple-600 via-purple-700 to-blue-800 text-white overflow-hidden"
+      >
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20"
+        ></div>
+        <div
+          class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32"
+        >
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 class="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+                Connect Through
+                <span class="block text-brand-200"> Events & Communities </span>
+              </h1>
+              <p class="text-xl text-brand-100 mb-8 leading-relaxed">
+                Join clubs, discover events, and build meaningful connections in
+                your community. Whether you're organizing or attending, EventHub
+                makes it seamless.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="pages/auth/register.html"
+                  class="bg-white text-purple-700 hover:bg-purple-50 font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200 px-6 py-3 rounded-lg inline-flex items-center justify-center"
+                >
+                  Get Started
+                  <svg
+                    class="w-4 h-4 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="pages/events.html"
+                  class="border-white text-white hover:bg-white hover:text-purple-700 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 px-6 py-3 rounded-lg border-2 inline-flex items-center justify-center"
+                >
+                  Browse Events
+                </a>
+              </div>
+            </div>
+
+            <div class="relative">
+              <div
+                class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 transform hover:scale-105"
+              >
+                <div class="space-y-4">
+                  <div class="flex items-center space-x-3">
+                    <div
+                      class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center shadow-lg"
+                    >
+                      <svg
+                        class="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="font-semibold">Tech Meetup Tonight</h3>
+                      <p class="text-purple-200 text-sm">
+                        124 people attending
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center space-x-2 text-sm text-purple-200"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span>6:00 PM - 9:00 PM</span>
+                  </div>
+                  <div
+                    class="flex items-center space-x-2 text-sm text-purple-200"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    <span>Downtown Convention Center</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Floating elements for visual appeal -->
+              <div
+                class="absolute -top-4 -right-4 w-8 h-8 bg-white/20 rounded-full animate-pulse"
+              ></div>
+              <div
+                class="absolute -bottom-2 -left-2 w-6 h-6 bg-purple-300/30 rounded-full animate-bounce"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+              class="text-center p-6 rounded-xl bg-gradient-to-br from-purple-50 to-blue-50 border border-purple-100"
+            >
+              <div class="text-3xl lg:text-4xl font-bold text-purple-600 mb-2">
+                10K+
+              </div>
+              <div class="text-gray-600 font-medium">Active Users</div>
+            </div>
+            <div
+              class="text-center p-6 rounded-xl bg-gradient-to-br from-purple-50 to-blue-50 border border-purple-100"
+            >
+              <div class="text-3xl lg:text-4xl font-bold text-purple-600 mb-2">
+                500+
+              </div>
+              <div class="text-gray-600 font-medium">Events Created</div>
+            </div>
+            <div
+              class="text-center p-6 rounded-xl bg-gradient-to-br from-purple-50 to-blue-50 border border-purple-100"
+            >
+              <div class="text-3xl lg:text-4xl font-bold text-purple-600 mb-2">
+                200+
+              </div>
+              <div class="text-gray-600 font-medium">Active Clubs</div>
+            </div>
+            <div
+              class="text-center p-6 rounded-xl bg-gradient-to-br from-purple-50 to-blue-50 border border-purple-100"
+            >
+              <div class="text-3xl lg:text-4xl font-bold text-purple-600 mb-2">
+                50K+
+              </div>
+              <div class="text-gray-600 font-medium">Connections Made</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Everything you need to connect
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+              Our platform brings together event organizers and attendees,
+              making it easy to discover, create, and manage community events.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              class="bg-white rounded-xl p-8 shadow-sm border border-gray-200 hover:shadow-lg hover:border-purple-200 transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center mb-6"
+              >
+                <svg
+                  class="w-6 h-6 text-purple-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                Discover Events
+              </h3>
+              <p class="text-gray-600">
+                Find exciting events happening in your community and beyond.
+              </p>
+            </div>
+            <div
+              class="bg-white rounded-xl p-8 shadow-sm border border-gray-200 hover:shadow-lg hover:border-purple-200 transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center mb-6"
+              >
+                <svg
+                  class="w-6 h-6 text-purple-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                Join Clubs
+              </h3>
+              <p class="text-gray-600">
+                Connect with like-minded people and join clubs that match your
+                interests.
+              </p>
+            </div>
+            <div
+              class="bg-white rounded-xl p-8 shadow-sm border border-gray-200 hover:shadow-lg hover:border-purple-200 transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center mb-6"
+              >
+                <svg
+                  class="w-6 h-6 text-purple-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                Easy Management
+              </h3>
+              <p class="text-gray-600">
+                Clubs can effortlessly create and manage events with our
+                intuitive tools.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Events -->
+      <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between mb-12">
+            <div>
+              <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                Featured Events
+              </h2>
+              <p class="text-xl text-gray-600">
+                Don't miss these exciting upcoming events
+              </p>
+            </div>
+            <a
+              href="pages/events.html"
+              class="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg inline-flex items-center"
+            >
+              View All Events
+              <svg
+                class="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-purple-200 transition-all duration-300 transform hover:-translate-y-2"
+            >
+              <div
+                class="h-48 bg-gradient-to-br from-purple-400 via-purple-500 to-blue-600"
+              ></div>
+              <div class="p-6">
+                <div
+                  class="flex items-center space-x-2 text-sm text-brand-600 mb-2"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                  <span>Tech Innovators Club</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                  Tech Meetup 2024
+                </h3>
+                <div class="space-y-2 text-sm text-gray-600 mb-4">
+                  <div class="flex items-center space-x-2">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <span>Dec 15, 2024</span>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span>6:00 PM</span>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    <span>Downtown Convention Center</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm text-gray-500">124 attending</span>
+                  <button
+                    class="bg-purple-600 text-white px-3 py-1 rounded text-sm hover:bg-purple-700 transition-colors"
+                  >
+                    Learn More
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-purple-200 transition-all duration-300 transform hover:-translate-y-2"
+            >
+              <div
+                class="h-48 bg-gradient-to-br from-purple-400 via-purple-500 to-blue-600"
+              ></div>
+              <div class="p-6">
+                <div
+                  class="flex items-center space-x-2 text-sm text-brand-600 mb-2"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                  <span>Creative Lens Society</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                  Photography Workshop
+                </h3>
+                <div class="space-y-2 text-sm text-gray-600 mb-4">
+                  <div class="flex items-center space-x-2">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <span>Dec 18, 2024</span>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span>2:00 PM</span>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    <span>Studio Art Space</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm text-gray-500">45 attending</span>
+                  <button
+                    class="bg-purple-600 text-white px-3 py-1 rounded text-sm hover:bg-purple-700 transition-colors"
+                  >
+                    Learn More
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-purple-200 transition-all duration-300 transform hover:-translate-y-2"
+            >
+              <div
+                class="h-48 bg-gradient-to-br from-purple-400 via-purple-500 to-blue-600"
+              ></div>
+              <div class="p-6">
+                <div
+                  class="flex items-center space-x-2 text-sm text-brand-600 mb-2"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                  <span>Entrepreneurs Network</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                  Startup Pitch Night
+                </h3>
+                <div class="space-y-2 text-sm text-gray-600 mb-4">
+                  <div class="flex items-center space-x-2">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <span>Dec 20, 2024</span>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span>7:00 PM</span>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    <span>Innovation Hub</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm text-gray-500">89 attending</span>
+                  <button
+                    class="bg-purple-600 text-white px-3 py-1 rounded text-sm hover:bg-purple-700 transition-colors"
+                  >
+                    Learn More
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section
+        class="py-20 bg-gradient-to-r from-purple-600 to-blue-800 text-white relative overflow-hidden"
+      >
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20"
+        ></div>
+        <div
+          class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        >
+          <h2 class="text-3xl lg:text-4xl font-bold mb-6">
+            Ready to start connecting?
+          </h2>
+          <p class="text-xl text-purple-100 mb-8">
+            Join thousands of people already using EventHub to discover events
+            and build communities.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="pages/auth/register.html"
+              class="bg-white text-purple-700 hover:bg-purple-50 shadow-lg px-6 py-3 rounded-lg font-medium"
+            >
+              Create Account
+            </a>
+            <a
+              href="pages/clubs.html"
+              class="border-white text-white hover:bg-white hover:text-purple-700 shadow-lg px-6 py-3 rounded-lg border-2 font-medium"
+            >
+              Browse Clubs
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
+

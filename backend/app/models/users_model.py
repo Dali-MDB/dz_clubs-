@@ -15,8 +15,8 @@ class User(Base):
     id = Column(Integer,unique=True,primary_key=True)
     email = Column(String(50),unique=True,index=True)
     password = Column(Text)
-    user_type = Column(Enum(user_types),default=user_types.CLUB)
-
+    user_type = Column(Enum(user_types),default=user_types.PERSON)
+    
     person = relationship('Person',back_populates='user',uselist=False)
     club = relationship('Club',back_populates='user',uselist=False)
 
@@ -33,10 +33,11 @@ class Person(Base):
     major = Column(String(50),index=True)
     year = Column(Integer)
     city = Column(String(20),nullable=True,index=True)
+    image_url = Column(String(255),nullable=True)
 
 
     user = relationship(User,back_populates='person')
-    clubs = relationship('Club',secondary='Membership',back_populates='members')
+    clubs = relationship('Club',secondary='Memberships',back_populates='members')
     applications = relationship('Application',back_populates='person')
 
     __table_args__ = (
@@ -56,9 +57,11 @@ class Club(Base):
     address = Column(String(100),nullable=True)
     description = Column(Text,nullable=True)
     phone = Column(String(20),nullable=True)
-
+    image_url = Column(String(255),nullable=True)
+    code_mail = Column(String(255),nullable=True)
+    
     user = relationship(User,back_populates='club')
-    members = relationship(Person,secondary='Membership',back_populates='clubs')
+    members = relationship(Person,secondary='Memberships',back_populates='clubs')
     events = relationship('Event',back_populates='club')
 
 
