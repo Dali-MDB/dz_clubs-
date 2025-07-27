@@ -22,7 +22,7 @@ app = FastAPI()
 #add cors
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080"],
+    allow_origins=["*"],   #for now
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -39,3 +39,4 @@ app.include_router(user_router,tags=['users'])
 app.include_router(membership_router,tags=['membership'])
 app.include_router(images_router,tags=['images'])
 app.include_router(utils_api,tags=['utils'])
+

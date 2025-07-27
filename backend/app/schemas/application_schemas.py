@@ -17,7 +17,7 @@ class ApplicationUpdate(ApplicationBase):
 
 class ApplicationDisplay(ApplicationBase):
     id : int
-    user_id : int
+    user_id : int|None = None
     submitted_at : datetime
     event_id : int
     status : application_status

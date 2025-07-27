@@ -4,7 +4,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 
-def send_email(sender,cred,subj,content,recipients=['dali.braham.mohamed13@gmail.com','bloodyangelofdespair@gmail.com']):
+def send_email(sender,cred,subj,content,recipients):
     sender_email = send_email
     #receiver_email = ",".join(recipients)
     password = cred  
@@ -16,7 +16,6 @@ def send_email(sender,cred,subj,content,recipients=['dali.braham.mohamed13@gmail
     msg["Subject"] = subj
     msg["From"] = sender_email
     msg["To"] = ", ".join(recipients)  # this is just for the email header (visible in inbox)
-
 
 
     # Attach the HTML content to the message
