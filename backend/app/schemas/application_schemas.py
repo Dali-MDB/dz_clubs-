@@ -28,7 +28,7 @@ class ApplicationDisplay(ApplicationBase):
 
 class Application(ApplicationBase):
     id : int
-    user_id : int
+    user_id : int 
     submitted_at : datetime
     event_id : int
     status : application_status
